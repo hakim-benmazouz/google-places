@@ -1,5 +1,8 @@
 # GooglePlaces
 
+[![tests](https://github.com/Wingly-Company/google-places/actions/workflows/tests.yml/badge.svg)](https://github.com/Wingly-Company/google-places/actions/workflows/tests.yml)
+[![code style](https://github.com/Wingly-Company/google-places/actions/workflows/code-style.yml/badge.svg)](https://github.com/Wingly-Company/google-places/actions/workflows/code-style.yml)
+
 ## Introduction 
 
 This package provides a server side integration of the [Google autocomplete service](https://developers.google.com/maps/documentation/places/web-service/autocomplete) and the [Google geocoding service](https://developers.google.com/maps/documentation/geocoding/start). 
