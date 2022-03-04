@@ -6,6 +6,7 @@
 ## Introduction 
 
 This package provides a server side integration of the [Google autocomplete service](https://developers.google.com/maps/documentation/places/web-service/autocomplete) and the [Google geocoding service](https://developers.google.com/maps/documentation/geocoding/start). 
+It takes care of caching the results for both autocompletion requests and geocoding.   
 
 ## Installation 
 
