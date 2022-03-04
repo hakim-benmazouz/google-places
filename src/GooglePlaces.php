@@ -9,6 +9,8 @@ use Wingly\GooglePlaces\Engines\GeocodeEngine;
 
 class GooglePlaces
 {
+    public static bool $registersRoutes = true;
+
     public static function autocomplete(string $query): Builder
     {
         return app(Builder::class, [
@@ -30,6 +32,13 @@ class GooglePlaces
     public static function clearCache(): void
     {
         static::store()->clear();
+    }
+
+    public static function ignoreRoutes(): static
+    {
+        static::$registersRoutes = false;
+
+        return new static();
     }
 
     protected static function store(): Repository

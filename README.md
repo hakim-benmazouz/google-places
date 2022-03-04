@@ -44,6 +44,11 @@ return [
      * This setting controls the default number of seconds responses must be cached.
      */
     'cache_lifetime' => env('GOOGLE_PLACES_CACHE_LIFETIME', 60 * 60 * 24 * 7),
+
+    /**
+     * This is the base URI path where Google places routes will be available from.
+     */
+    'path' => env('GOOGLE_PLACES_PATH', 'addresses'),
 ];
 ```
 
@@ -98,3 +103,30 @@ GooglePlace::autocomplete('par')->setTypes('(cities)')->get();
 ```
 
 This option is available only for autocompletion.
+
+## Addresses autocompletion and geocoding routes
+
+The package exposes two routes that you can use for addresses autocompletion and geocoding under the following URL paths `/addresses/autocomplete`, `/addresses/geocode`. 
+You can streamline your search by adding the following query params to your url: 
+`input` the user entered input for the autocomplete or a full address for geocoding. 
+`language` to get the results in a specific language. Defaults to the application current locale. 
+`country` to get the results for a specific country. 
+`types` to get the results for a specific type. Available only for autocomplete requests.
+
+If you like to prevent the publishing of those routes completely, you can use the `ignoreRoutes` method provided by GooglePlaces.  
+Typically this method should be called in the register method of your `AppServiceProvider`: 
+
+```php 
+use Wingly\GooglePlaces\GooglePlaces;
+ 
+/**
+ * Register any application services.
+ *
+ * @return void
+ */
+public function register()
+{
+    GooglePlaces::ignoreRoutes();
+}
+```
+

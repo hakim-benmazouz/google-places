@@ -17,4 +17,9 @@ return [
      * This setting controls the default number of seconds responses must be cached.
      */
     'cache_lifetime' => env('GOOGLE_PLACES_CACHE_LIFETIME', 60 * 60 * 24 * 7),
+
+    /**
+     * This is the base URI path where Google places routes will be available from.
+     */
+    'path' => env('GOOGLE_PLACES_PATH', 'addresses'),
 ];

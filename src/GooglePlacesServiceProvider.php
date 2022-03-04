@@ -3,6 +3,7 @@
 namespace Wingly\GooglePlaces;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Wingly\GooglePlaces\Engines\AutocompleteEngine;
 use Wingly\GooglePlaces\Engines\GeocodeEngine;
@@ -11,6 +12,7 @@ class GooglePlacesServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        $this->registerRoutes();
         $this->registerPublishing();
     }
 
@@ -43,6 +45,18 @@ class GooglePlacesServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/google-places.php' => $this->app->configPath('google-places.php'),
             ], 'google-places-config');
+        }
+    }
+
+    protected function registerRoutes(): void
+    {
+        if (GooglePlaces::$registersRoutes) {
+            Route::group([
+                'prefix' => config('google-places.path'),
+                'as' => 'google.',
+            ], function () {
+                $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+            });
         }
     }
 }
