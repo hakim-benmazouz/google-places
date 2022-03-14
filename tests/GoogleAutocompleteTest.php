@@ -18,6 +18,7 @@ class GoogleAutocompleteTest extends TestCase
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('place_id', $result);
         $this->assertArrayHasKey('reference', $result);
+        $this->assertArrayHasKey('matched_substrings', $result);
     }
 
     public function test_it_should_return_an_empty_response_when_called_with_empty_query()

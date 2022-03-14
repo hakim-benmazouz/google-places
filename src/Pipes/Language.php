@@ -9,9 +9,7 @@ class Language
     public function handle(Builder $builder, $next): mixed
     {
         if (request()->has('language')) {
-            $builder->setLanguage(request('language'));
-        } else {
-            $builder->setLanguage(app()->getLocale());
+            $builder->setLanguage(request('language', ''));
         }
 
         return $next($builder);

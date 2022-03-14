@@ -59,6 +59,7 @@ class AutocompleteEngine implements Engine
                 'name' => $result->description,
                 'place_id' => $result->place_id,
                 'reference' => $result->reference,
+                'matched_substrings' => $result->matched_substrings,
             ];
         }, $response->predictions);
 

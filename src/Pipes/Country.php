@@ -9,7 +9,7 @@ class Country
     public function handle(Builder $builder, $next): mixed
     {
         if (request()->has('country')) {
-            $builder->setCountry(request('country'));
+            $builder->setCountry(request('country', ''));
         }
 
         return $next($builder);

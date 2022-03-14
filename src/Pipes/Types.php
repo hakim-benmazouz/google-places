@@ -9,7 +9,7 @@ class Types
     public function handle(Builder $builder, $next): mixed
     {
         if (request()->has('types')) {
-            $builder->setTypes(request('types'));
+            $builder->setTypes(request('types', ''));
         }
 
         return $next($builder);

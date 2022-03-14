@@ -14,6 +14,9 @@ class Builder
     public $types;
 
     /** @var string */
+    public $fields;
+
+    /** @var string */
     public $country;
 
     /** @var string */
@@ -51,6 +54,13 @@ class Builder
     public function setTypes(string $types): self
     {
         $this->types = $types;
+
+        return $this;
+    }
+
+    public function setFields(string $fields): self
+    {
+        $this->fields = $fields;
 
         return $this;
     }

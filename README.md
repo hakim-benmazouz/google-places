@@ -5,8 +5,11 @@
 
 ## Introduction 
 
-This package provides a server side integration of the [Google autocomplete service](https://developers.google.com/maps/documentation/places/web-service/autocomplete) and the [Google geocoding service](https://developers.google.com/maps/documentation/geocoding/start). 
-It takes care of caching the results for both autocompletion requests and geocoding.   
+This package provides a server side integration of Google Places services.
+The following place requests are available: 
+- [Autocomplete](https://developers.google.com/maps/documentation/places/web-service/autocomplete) 
+- [Geocode](https://developers.google.com/maps/documentation/geocoding/start) 
+- [Details](https://developers.google.com/maps/documentation/places/web-service/details)
 
 ## Installation 
 
@@ -76,7 +79,18 @@ public function index(Request $request)
 }
 ```
 
-You can optionally configure your search parameters for both autocompletion and geocoding.   
+Here's how you can use the Google place details.
+
+```php 
+public function index(Request $request)
+{
+    $results = GooglePlaces::details($request->input('place_id'))->get();
+
+    return response()->json($results);
+}
+```
+
+You can optionally configure your search parameters. 
 
 ### Language 
 To get the results in a specific language: 
@@ -84,6 +98,7 @@ To get the results in a specific language:
 ```php 
 GooglePlace::autocomplete('par')->setLanguage('fr')->get();
 GooglePlace::geocode('Paris, France')->setLanguage('fr')->get();
+GooglePlace::details('ChIJN1t_tDeuEmsRUsoyG83frY4')->setLanguage('fr')->get();
 ```
 
 ### Country 
@@ -95,7 +110,6 @@ GooglePlace::geocode('Paris, France')->setCountry('FR')->get();
 ```
 
 ### Types 
-
 To restrict results for specific types (https://developers.google.com/maps/documentation/places/web-service/supported_types#table3): 
 
 ```php 
@@ -103,6 +117,17 @@ GooglePlace::autocomplete('par')->setTypes('(cities)')->get();
 ```
 
 This option is available only for autocompletion.
+
+### Fields 
+To specify a list of place data types to be included in the response (https://developers.google.com/maps/documentation/places/web-service/details#fields): 
+
+```php 
+$result = GooglePlaces::details('ChIJN1t_tDeuEmsRUsoyG83frY4')
+    ->setFields('website,opening_hours')
+    ->get();
+```
+
+This option is available only for place details.
 
 ## Addresses autocompletion and geocoding routes
 

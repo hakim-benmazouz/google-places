@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Wingly\GooglePlaces\Engines\AutocompleteEngine;
+use Wingly\GooglePlaces\Engines\DetailsEngine;
 use Wingly\GooglePlaces\Engines\GeocodeEngine;
 
 class GooglePlacesServiceProvider extends ServiceProvider
@@ -33,6 +34,15 @@ class GooglePlacesServiceProvider extends ServiceProvider
             $client = app(Client::class);
 
             return new GeocodeEngine(
+                config('google-places.google_api_key'),
+                $client,
+            );
+        });
+
+        $this->app->bind(DetailsEngine::class, function ($app) {
+            $client = app(Client::class);
+
+            return new DetailsEngine(
                 config('google-places.google_api_key'),
                 $client,
             );

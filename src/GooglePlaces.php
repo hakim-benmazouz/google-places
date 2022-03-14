@@ -5,6 +5,7 @@ namespace Wingly\GooglePlaces;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Cache\Repository;
 use Wingly\GooglePlaces\Engines\AutocompleteEngine;
+use Wingly\GooglePlaces\Engines\DetailsEngine;
 use Wingly\GooglePlaces\Engines\GeocodeEngine;
 
 class GooglePlaces
@@ -25,6 +26,15 @@ class GooglePlaces
         return app(Builder::class, [
             'query' => $address,
             'engine' => app(GeocodeEngine::class),
+            'cache' => static::store(),
+        ]);
+    }
+
+    public static function details(string $placeId): Builder
+    {
+        return app(Builder::class, [
+            'query' => $placeId,
+            'engine' => app(DetailsEngine::class),
             'cache' => static::store(),
         ]);
     }
