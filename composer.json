@@ -38,10 +38,7 @@
         "laravel": {
             "providers": [
                 "Wingly\\GooglePlaces\\GooglePlacesServiceProvider"
-            ],
-            "aliases": {
-                "GooglePlaces": "Wingly\\GooglePlaces\\Facades\\GooglePlaces"
-            }
+            ]
         }
     },
     "scripts": {
