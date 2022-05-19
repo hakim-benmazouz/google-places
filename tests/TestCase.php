@@ -19,4 +19,9 @@ abstract class TestCase extends Orchestra
     {
         return [GooglePlacesServiceProvider::class];
     }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('google-places.path', getenv('GOOGLE_PLACES_PATH', 'addresses'));
+    }
 }
