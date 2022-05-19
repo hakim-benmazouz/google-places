@@ -16,7 +16,7 @@ class AutocompleteController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         $results = app(Pipeline::class)
-            ->send(GooglePlaces::autocomplete($request->query('input', '')))
+            ->send(GooglePlaces::autocomplete($request->query('input') ?? ''))
             ->through([Language::class, Country::class, Types::class])
             ->thenReturn()
             ->get();
